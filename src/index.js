@@ -15,7 +15,9 @@ function updateUI() {
         el('#content').style.display = '';
     }
 }
-
+/**
+ * Listen to state change event
+ */
 omneedia.auth.onAuthStateChange(async(event, session) => {
     console.log('event: ', event);
     updateUI();
