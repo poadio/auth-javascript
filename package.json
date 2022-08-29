@@ -1,22 +1,16 @@
 {
-    "name": "auth",
+    "name": "auth-vanillajs",
     "version": "1.0.0",
-    "description": "Live Example: [https://auth-vanilla-js.vercel.app/](https://auth-vanilla-js.vercel.app/)",
-    "main": "index.js",
+    "description": "Auth demo app with vanilla js",
+    "main": "index.html",
     "scripts": {
-        "start": "http-server -c-1 -p 8081 ./src"
+        "start": "parcel src/index.html --open",
+        "build": "parcel build src/index.html"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/poadio/vanillajs-auth.git"
+    "dependencies": {},
+    "devDependencies": {
+        "@babel/core": "7.2.0",
+        "parcel-bundler": "^1.6.1"
     },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/poadio/vanillajs-auth/issues"
-    },
-    "homepage": "https://github.com/poadio/vanillajs-auth#readme",
-    "dependencies": {
-        "http-server": "^14.1.1"
-    }
+    "keywords": []
 }

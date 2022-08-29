@@ -1,7 +1,10 @@
 /**
  * create omneedia client
  */
-var omneedia = omneedia.createClient(env.OMNEEDIA_URL, env.OMNEEDIA_KEY);
+var omneedia = window.omneedia.createClient(
+    window.env.OMNEEDIA_URL,
+    window.env.OMNEEDIA_KEY
+);
 var el = function(o) {
     return document.querySelector(o);
 };
