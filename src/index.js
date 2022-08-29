@@ -1,87 +1,86 @@
-var supabase = supabase.createClient(env.SUPABASE_URL, env.SUPABASE_KEY);
-window.userToken = null;
+/**
+ * create omneedia client
+ */
+var omneedia = omneedia.createClient(env.OMNEEDIA_URL, env.OMNEEDIA_KEY);
+var el = function(o) {
+    return document.querySelector(o);
+};
 
-function load() {
-    function updateUI() {
-        if (!supabase.auth.session()) {
-            document.getElementById('auth').style.display = '';
-            document.getElementById('content').style.display = 'none';
-        } else {
-            document.getElementById('auth').style.display = 'none';
-            document.getElementById('content').style.display = '';
-        }
-    }
-    supabase.auth.onAuthStateChange(async(event, session) => {
-        console.log('event: ', event);
-        updateUI();
-    });
-    if (!supabase.auth.session()) {
-        document.getElementById('auth').style.display = '';
-        document.getElementById('content').style.display = 'none';
+function updateUI() {
+    if (!omneedia.auth.session()) {
+        el('#auth').style.display = '';
+        el('#content').style.display = 'none';
     } else {
-        document.getElementById('auth').style.display = 'none';
-        document.getElementById('content').style.display = '';
+        el('#auth').style.display = 'none';
+        el('#content').style.display = '';
     }
-
-    function signInWithGithub() {
-        supabase.auth.signIn({
-            provider: 'github',
-        });
-    }
-
-    function signInWithEmail() {
-        supabase.auth
-            .signIn({
-                email: $('#email').val(),
-                password: $('#password').val(),
-            })
-            .then(function(response) {
-                console.log(response);
-                if (response.error) return alert('ERROR:\n' + response.error.message);
-            })
-            .catch(function(e) {
-                console.log(e);
-            });
-    }
-
-    function signInWithMagic() {
-        supabase.auth
-            .signIn({
-                email: $('#email_magic').val(),
-            })
-            .then(function(response) {
-                console.log(response);
-                if (response.error) return alert('ERROR:\n' + response.error.message);
-                alert('Mail has been sent successfully');
-            })
-            .catch(function(e) {
-                console.log(e);
-            });
-    }
-
-    function signUpWithEmail() {
-        supabase.auth
-            .signUp({
-                email: $('#email').val(),
-                password: $('#password').val(),
-            })
-            .then(function(response) {
-                console.log(response);
-                if (response.error) return alert('ERROR:\n' + response.error.message);
-            })
-            .catch(function(e) {
-                console.log(e);
-            });
-    }
-
-    function logout() {
-        supabase.auth.signOut();
-    }
-    $('#login_via_github').click(signInWithGithub);
-    $('#logout').click(logout);
-    $('#signup_via_email').click(signUpWithEmail);
-    $('#signin_via_email').click(signInWithEmail);
-    $('#signin_via_magic_link').click(signInWithMagic);
 }
 
-document.addEventListener('DOMContentLoaded', load);
+omneedia.auth.onAuthStateChange(async(event, session) => {
+    console.log('event: ', event);
+    updateUI();
+});
+
+function signInWithGithub() {
+    omneedia.auth.signIn({
+        provider: 'github',
+    });
+}
+
+function signInWithEmail() {
+    omneedia.auth
+        .signIn({
+            email: el('#email').value,
+            password: el('#password').value,
+        })
+        .then(function(response) {
+            console.log(response);
+            if (response.error) return alert('ERROR:\n' + response.error.message);
+        })
+        .catch(function(e) {
+            console.log(e);
+        });
+}
+
+function signInWithMagic() {
+    omneedia.auth
+        .signIn({
+            email: el('#email_magic').value,
+        })
+        .then(function(response) {
+            if (response.error) return alert('ERROR:\n' + response.error.message);
+            alert('Mail has been sent successfully');
+        })
+        .catch(function(e) {
+            console.log(e);
+        });
+}
+
+function signUpWithEmail() {
+    omneedia.auth
+        .signUp({
+            email: el('#email').value,
+            password: el('#password').value,
+        })
+        .then(function(response) {
+            if (response.error) return alert('ERROR:\n' + response.error.message);
+            alert('email sent successfully.');
+        })
+        .catch(function(e) {
+            console.log(e);
+        });
+}
+
+function logout() {
+    omneedia.auth.signOut();
+}
+
+el('#login_via_github').addEventListener('click', signInWithGithub);
+el('#logout').addEventListener('click', logout);
+el('#signup_via_email').addEventListener('click', signUpWithEmail);
+el('#signin_via_email').addEventListener('click', signInWithEmail);
+el('#signin_via_magic_link').addEventListener('click', signInWithMagic);
+
+/** update UI
+ */
+updateUI();
