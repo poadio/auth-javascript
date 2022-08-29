@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.js"></script>
+    <script src="./env.js"></script>
+    <script src="./index.js"></script>
+</head>
+
+<body>
+    <div style="margin:10px">
+        <h1>Auth demo</h1>
+        <div id="auth" style="display:none;">
+            <h4>AUTH VIA EMAILS</h4>
+            <form class="ui form">
+                <div class="field">
+                    <label>E-MAIL</label>
+                    <input type="text" id="email" placeholder="E-MAIL">
+                </div>
+                <div class="field">
+                    <label>PASSWORD</label>
+                    <input type="password" id="password" placeholder="PASSWORD">
+                </div>
+            </form>
+            <div style="text-align:center">
+                <button id="signup_via_email" class="button ui">SIGN UP</button>
+                <button id="signin_via_email" class="button ui">SIGN IN</button>
+            </div>
+            <h4>AUTH VIA MAGIC LINK</h4>
+            <form class="ui form">
+                <div class="field">
+                    <label>E-MAIL</label>
+                    <input type="text" id="email_magic" placeholder="E-MAIL">
+                </div>
+            </form>
+            <div style="text-align:center">
+                <button id="signin_via_magic_link" class="button ui">SEND MAGIC LINK</button>
+            </div>
+            <h4>AUTH VIA PROVIDERS</h4>
+            <div style="text-align:center">
+                <button class="button ui" id="login_via_github">AUTH VIA GITHUB</button>
+            </div>
+        </div>
+        <br>
+        <div id="content" style="display:none">
+            <h2>You're authenticated!</h2>
+            <button class="button ui" id="logout">LOGOUT</button>
+        </div>
+    </div>
+</body>
+
+</html>
