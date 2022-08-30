@@ -1,10 +1,4 @@
-/**
- * create omneedia client
- */
-var omneedia = window.omneedia.createClient(
-    window.env.OMNEEDIA_URL,
-    window.env.OMNEEDIA_KEY
-);
+var omneedia;
 var el = function(o) {
     return document.querySelector(o);
 };
@@ -17,14 +11,12 @@ function updateUI() {
         el('#auth').style.display = 'none';
         el('#content').style.display = '';
     }
+    el('#login_via_github').addEventListener('click', signInWithGithub);
+    el('#logout').addEventListener('click', logout);
+    el('#signup_via_email').addEventListener('click', signUpWithEmail);
+    el('#signin_via_email').addEventListener('click', signInWithEmail);
+    el('#signin_via_magic_link').addEventListener('click', signInWithMagic);
 }
-/**
- * Listen to state change event
- */
-omneedia.auth.onAuthStateChange(async(event, session) => {
-    console.log('event: ', event);
-    updateUI();
-});
 
 function signInWithGithub() {
     omneedia.auth.signIn({
@@ -80,12 +72,20 @@ function logout() {
     omneedia.auth.signOut();
 }
 
-el('#login_via_github').addEventListener('click', signInWithGithub);
-el('#logout').addEventListener('click', logout);
-el('#signup_via_email').addEventListener('click', signUpWithEmail);
-el('#signin_via_email').addEventListener('click', signInWithEmail);
-el('#signin_via_magic_link').addEventListener('click', signInWithMagic);
+function load() {
+    console.log('load');
+    omneedia = window.omneedia.createClient(env.OMNEEDIA_URL, env.OMNEEDIA_KEY);
+    /**
+     * Listen to state change event
+     */
+    omneedia.auth.onAuthStateChange(async(event, session) => {
+        console.log('event: ', event);
+        updateUI();
+    });
+    /**
+     * UpdateUI based on sessison
+     */
+    updateUI();
+}
 
-/** update UI
- */
-updateUI();
+window.addEventListener('load', load);

@@ -1,2 +1,1 @@
-# Vanilla-js Auth Example
-
+# Vanilla-js Auth Demo

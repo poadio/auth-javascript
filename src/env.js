@@ -1,4 +1,4 @@
-window.env = {
+var env = {
     OMNEEDIA_URL: '{{OMNEEDIA_URL}}',
     OMNEEDIA_KEY: '{{OMNEEDIA_KEY}}',
 };

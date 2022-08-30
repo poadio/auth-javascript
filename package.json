@@ -1,16 +1,14 @@
 {
-    "name": "auth-vanillajs",
+    "name": "demo-auth-vanillajs",
     "version": "1.0.0",
-    "description": "Auth demo app with vanilla js",
+    "description": "Auth Demo client for Omneedia",
     "main": "index.html",
     "scripts": {
-        "start": "parcel src/index.html --open",
-        "build": "parcel build src/index.html"
+        "start": "serve"
     },
     "dependencies": {},
     "devDependencies": {
-        "@babel/core": "7.2.0",
-        "parcel-bundler": "^1.6.1"
+        "serve": "*"
     },
     "keywords": []
 }
